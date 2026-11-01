@@ -1,0 +1,23 @@
+# Deploy in Render using New > Blueprint and this GitHub repository.
+# First create a Render Key Value instance for REDIS_URL or provide another private Redis-compatible store.
+services:
+  - type: web
+    name: google-account-lens
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: GOOGLE_REDIRECT_URI
+        sync: false
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: REDIS_URL
+        sync: false

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Discover what Google actually shares with a website when you sign in, with optional additional profile permissions.">
+  <title>Account Lens — Understand your Google sign-in data</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="site">
+    <aside class="sidebar">
+      <a class="brand" href="/" aria-label="Account Lens home">
+        <span class="brand-mark" aria-hidden="true">✳</span>
+        <span><strong>account<span class="text-gradient">lens</span></strong><small>DATA TRANSPARENCY LAB</small></span>
+      </a>
+      <div class="sidebar-tag"><span class="status-dot"></span> A clearer look at your data</div>
+      <p class="nav-heading">EXPLORE</p>
+      <nav class="navigation" aria-label="Dashboard sections">
+        <button type="button" class="nav-item is-active" data-page="overview"><span class="nav-icon">◫</span> Overview</button>
+        <button type="button" class="nav-item" data-page="data"><span class="nav-icon">{ }</span> Data explorer</button>
+        <button type="button" class="nav-item" data-page="permissions"><span class="nav-icon">◎</span> Permissions</button>
+        <button type="button" class="nav-item" data-page="possibilities"><span class="nav-icon">▦</span> What else is possible?</button>
+        <button type="button" class="nav-item" data-page="privacy"><span class="nav-icon">♧</span> Privacy & setup</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-note"><span class="note-illustration">🔐</span><strong>Built for transparency</strong><p>This website shows what Google actually returns—not a guess about everything Google knows.</p></div>
+        <p class="version-label">DEMO PROJECT · VERSION 1.0</p>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="crumb">ACCOUNT LENS <span>/</span> <strong id="current-page-title">Overview</strong></div>
+        <div class="top-actions">
+          <span class="session-label" id="session-label"><span class="status-dot"></span> Not connected</span>
+          <button class="small-button" type="button" id="top-logout" hidden>Sign out</button>
+          <a class="round-link" href="https://myaccount.google.com/connections" target="_blank" rel="noopener noreferrer" title="Manage apps connected to your Google account" aria-label="Manage Google connections">↗</a>
+        </div>
+      </header>
+      <div class="content-inner">
+        <div id="app-alert" class="alert" role="alert" hidden></div>
+        <div id="demo-banner" class="demo-banner" hidden><span>✦</span> <strong>DEMO MODE</strong> — Fictional sample information, not from your Google account. <button type="button" id="exit-demo">Exit demo</button></div>
+
+        <section class="page" data-section="overview">
+          <div class="hero">
+            <div class="hero-orb orb-1"></div><div class="hero-orb orb-2"></div>
+            <div class="hero-inner">
+              <div class="eyebrow"><span class="tiny-spark">✳</span> YOUR DIGITAL IDENTITY, EXPLAINED</div>
+              <h1 id="hero-heading">What does Google <em>share</em> about you?</h1>
+              <p id="hero-subtitle">Connect your Google account to see the exact profile fields this website receives, with full transparency about permissions and what stays private.</p>
+              <div class="hero-actions" id="hero-actions">
+                <a class="btn btn-google" href="/auth/google" id="connect-google"><span class="google-g" aria-hidden="true">G</span> Continue with Google <span>↗</span></a>
+                <button class="btn btn-secondary" type="button" id="launch-demo">Explore sample dashboard <span>→</span></button>
+              </div>
+              <div class="hero-footer"><span>✓ No password collected</span><span>✓ No inbox access</span><span>✓ You choose extra permissions</span></div>
+            </div>
+            <div class="hero-decoration" aria-hidden="true"><div class="halo halo-1"></div><div class="halo halo-2"></div><div class="halo halo-3"></div><div class="halo-core">✳</div></div>
+          </div>
+          <div id="profile-zone" hidden>
+            <div class="section-heading"><div><p class="overline">YOUR CONNECTION</p><h2>Your Google profile</h2></div><button class="text-button" type="button" id="view-raw">View all raw data →</button></div>
+            <div class="profile-card">
+              <div class="profile-image" id="profile-photo">G</div>
+              <div class="profile-meta"><span class="small-caption">SIGNED IN WITH GOOGLE</span><h3 id="profile-name">—</h3><p id="profile-email">—</p></div>
+              <div class="profile-badge"><span class="status-dot"></span> Connected</div>
+            </div>
+            <div class="stats-grid">
+              <div class="stat-card"><span class="stat-icon">◈</span><strong id="field-count">0</strong><span>Account fields returned</span><small>From Google sign-in</small></div>
+              <div class="stat-card"><span class="stat-icon">◇</span><strong id="scope-count">0</strong><span>Scopes granted</span><small>Permissions on this session</small></div>
+              <div class="stat-card"><span class="stat-icon">▤</span><strong id="extra-count">0</strong><span>Extra profile areas</span><small>Only with explicit consent</small></div>
+            </div>
+            <div class="two-col">
+              <article class="panel"><div class="panel-head"><div><p class="overline">GOOGLE RETURNED</p><h3>Account details</h3></div><span class="pill pill-green">Live data</span></div><div id="quick-fields" class="quick-fields"></div></article>
+              <article class="panel privacy-panel"><span class="privacy-illustration">◌</span><p class="overline">IMPORTANT TO KNOW</p><h3>Signing in isn't the same as giving full access.</h3><p>Your Google password, Gmail inbox, Drive files, location history, and other personal data are <strong>not</strong> revealed by ordinary Google sign-in.</p><button class="inline-link" type="button" data-go="possibilities">See how permissions work →</button></article>
+            </div>
+          </div>
+          <div id="intro-zone">
+            <div class="section-heading"><div><p class="overline">HOW IT WORKS</p><h2>Three steps to clarity</h2></div></div>
+            <div class="steps-grid"><article class="step-card"><span class="step-number">01</span><div class="step-icon">◉</div><h3>Connect securely</h3><p>Authenticate on Google's own website. Your password never passes through this app.</p></article><article class="step-card"><span class="step-number">02</span><div class="step-icon">◈</div><h3>See exactly what's shared</h3><p>Inspect Google UserInfo and verified ID-token claims, field by field.</p></article><article class="step-card"><span class="step-number">03</span><div class="step-icon">✧</div><h3>Choose extra access</h3><p>Optional profile details need additional consent and may require Google API approval.</p></article></div>
+          </div>
+        </section>
+
+        <section class="page" data-section="data" hidden>
+          <div class="page-intro"><p class="overline">COMPLETE RESPONSE VIEW</p><h1>Data explorer<span class="accent-period">.</span></h1><p>These are the exact data fields provided to this website. “Not provided” means the value wasn't returned, not that Google has no record of it.</p></div>
+          <div class="empty-state" id="data-empty"><div class="empty-icon">{ }</div><h3>Connect to inspect actual Google data</h3><p>Sign in or explore a clearly labeled fictional sample.</p><button class="btn btn-secondary" type="button" data-go="overview">Go to sign-in →</button></div>
+          <div id="data-connected" hidden>
+            <div class="data-toolbar"><div><span class="pill pill-green" id="data-status">Actual Google response</span><span class="muted" id="last-fetched"></span></div><button class="btn btn-small btn-secondary" type="button" id="export-json">↓ Export JSON</button></div>
+            <article class="panel field-panel"><div class="panel-head"><div><p class="overline">FIELD BY FIELD</p><h3>Normalized account fields</h3></div><span class="pill">Sign-in</span></div><div id="all-fields" class="field-table"></div></article>
+            <div class="raw-grid"><article class="panel json-panel"><div class="panel-head"><div><p class="overline">OPENID CONNECT</p><h3>UserInfo response</h3></div><button type="button" class="copy-btn" data-copy="userinfo">Copy JSON</button></div><pre id="json-userinfo" class="json-data"></pre></article><article class="panel json-panel"><div class="panel-head"><div><p class="overline">SERVER VERIFIED</p><h3>ID token claims</h3></div><button type="button" class="copy-btn" data-copy="claims">Copy JSON</button></div><pre id="json-claims" class="json-data"></pre></article></div>
+            <article class="panel json-panel"><div class="panel-head"><div><p class="overline">OPTIONAL CONSENT</p><h3>People API response</h3></div><button type="button" class="copy-btn" data-copy="people">Copy JSON</button></div><p class="hint" id="people-message">Not requested. Extra profile permissions are optional.</p><pre id="json-people" class="json-data" hidden></pre></article>
+            <p class="sensitive-note">These records may contain personal information. Downloaded JSON files are saved by your browser—keep them private.</p>
+          </div>
+        </section>
+
+        <section class="page" data-section="permissions" hidden>
+          <div class="page-intro"><p class="overline">YOUR CHOICE</p><h1>Permissions<span class="accent-period">.</span></h1><p>See what's already approved, and optionally ask Google for a few additional <strong>read-only profile</strong> permissions. Nothing extra is requested automatically.</p></div>
+          <div class="notice"><span class="notice-icon">ⓘ</span><div><strong>Permission does not equal available data.</strong><p>Google shares only the data it returns for the granted scopes and enabled APIs. Some values may be missing, and some extra scopes require app testing or verification.</p></div></div>
+          <div class="section-heading"><div><p class="overline">STANDARD SIGN-IN</p><h2>Basic permissions</h2></div><span class="pill">3 scopes requested</span></div>
+          <div class="permission-stack">
+            <article class="permission-item"><span class="permission-symbol">◎</span><div><h3>Identity (openid)</h3><p>Stable Google account identifier and identity token information</p><code>openid</code></div><span class="permission-status" data-basic="openid">Not granted</span></article>
+            <article class="permission-item"><span class="permission-symbol">✉</span><div><h3>Email</h3><p>Primary email address and its verification status</p><code>email</code></div><span class="permission-status" data-basic="email">Not granted</span></article>
+            <article class="permission-item"><span class="permission-symbol">◉</span><div><h3>Basic profile</h3><p>Display name, profile photo, and other available public/basic profile fields</p><code>profile</code></div><span class="permission-status" data-basic="profile">Not granted</span></article>
+          </div>
+          <div class="section-heading section-heading-space"><div><p class="overline">ONLY IF YOU OPT IN</p><h2>More profile details</h2></div><span class="pill pill-orange">Separate permission request</span></div>
+          <div class="permission-stack" id="extra-permission-list">
+            <label class="permission-item selectable" data-extra="birthday"><span class="permission-symbol">▣</span><div><h3>Birthday</h3><p>Birthday recorded in your Google profile, if available</p><code>user.birthday.read</code></div><span class="permission-status extra-status">Not granted</span><input type="checkbox" value="birthday" class="permission-checkbox" aria-label="Request birthday access"></label>
+            <label class="permission-item selectable" data-extra="phone"><span class="permission-symbol">☏</span><div><h3>Phone numbers</h3><p>Phone numbers stored in your Google profile, if available</p><code>user.phonenumbers.read</code></div><span class="permission-status extra-status">Not granted</span><input type="checkbox" value="phone" class="permission-checkbox" aria-label="Request phone access"></label>
+            <label class="permission-item selectable" data-extra="address"><span class="permission-symbol">⌂</span><div><h3>Addresses</h3><p>Street or postal addresses saved to your profile, if available</p><code>user.addresses.read</code></div><span class="permission-status extra-status">Not granted</span><input type="checkbox" value="address" class="permission-checkbox" aria-label="Request address access"></label>
+            <label class="permission-item selectable" data-extra="gender"><span class="permission-symbol">◇</span><div><h3>Gender</h3><p>Gender value if entered and permitted to be shared</p><code>user.gender.read</code></div><span class="permission-status extra-status">Not granted</span><input type="checkbox" value="gender" class="permission-checkbox" aria-label="Request gender access"></label>
+            <label class="permission-item selectable" data-extra="organization"><span class="permission-symbol">▦</span><div><h3>Organizations</h3><p>Education and work information saved in your profile, if available</p><code>user.organization.read</code></div><span class="permission-status extra-status">Not granted</span><input type="checkbox" value="organization" class="permission-checkbox" aria-label="Request organization access"></label>
+          </div>
+          <div class="permission-cta"><div><strong>Ready to request more?</strong><p>Google will show a consent screen. You can decline at any point. Enable the People API in your Google Cloud project first.</p></div><button class="btn btn-primary" type="button" id="request-extra">Request selected access →</button></div>
+          <article class="panel granted-scopes"><div class="panel-head"><div><p class="overline">TECHNICAL DETAILS</p><h3>All granted scopes returned by Google</h3></div></div><div id="scope-list" class="scope-list"><span class="muted">Sign in to see your scopes.</span></div></article>
+        </section>
+
+        <section class="page" data-section="possibilities" hidden>
+          <div class="page-intro"><p class="overline">WHAT IS AND IS NOT SHARED</p><h1>The bigger picture<span class="accent-period">.</span></h1><p>Google sign-in is <strong>not</strong> a key to your whole Google account. Other Google services have their own APIs and separate permissions.</p></div>
+          <div class="cards-possibilities">
+            <article class="possibility-card"><span class="poss-icon">✉</span><div><h3>Gmail messages</h3><span class="pill pill-orange">Extra approval required</span><p>Access to inbox contents requires Gmail-specific permissions and is <strong>not enabled</strong> in this website.</p></div></article>
+            <article class="possibility-card"><span class="poss-icon">▧</span><div><h3>Drive files</h3><span class="pill pill-orange">Extra approval required</span><p>Viewing files or file metadata requires separate Google Drive permissions. This website does not request them.</p></div></article>
+            <article class="possibility-card"><span class="poss-icon">▦</span><div><h3>Calendar events</h3><span class="pill pill-orange">Extra approval required</span><p>Calendar data needs its own scope and separate consent. This website does not request it.</p></div></article>
+            <article class="possibility-card"><span class="poss-icon">◌</span><div><h3>Google Contacts</h3><span class="pill pill-orange">Extra approval required</span><p>Other people's contact details require a separate permission; optional profile access here does <em>not</em> request contacts.</p></div></article>
+            <article class="possibility-card"><span class="poss-icon">⊙</span><div><h3>Passwords & private account security</h3><span class="pill pill-green">Not shared by sign-in</span><p>Your Google password is never given to a website by the Google OAuth sign-in flow.</p></div></article>
+            <article class="possibility-card"><span class="poss-icon">⌾</span><div><h3>Everything Google stores</h3><span class="pill">No single all-data permission</span><p>No basic OAuth token reveals the full Google account archive. You can use Google's own data export tools for a broader personal record.</p></div></article>
+          </div>
+          <article class="takeout-banner"><div><p class="overline">WANT YOUR FULLER GOOGLE ARCHIVE?</p><h3>Try Google Takeout</h3><p>Google Takeout lets you export eligible account data directly from Google. It is separate from what this demo website can access.</p></div><a class="btn btn-secondary" href="https://takeout.google.com/" target="_blank" rel="noopener noreferrer">Open Google Takeout ↗</a></article>
+        </section>
+
+        <section class="page" data-section="privacy" hidden>
+          <div class="page-intro"><p class="overline">IN CONTROL</p><h1>Privacy & setup<span class="accent-period">.</span></h1><p>A transparent account-data explorer. Each visitor can see only the data returned for the Google account they choose to authorize.</p></div>
+          <div class="two-col privacy-grid"><article class="panel"><div class="panel-head"><h3>How this app handles data</h3><span class="pill pill-green">Limited retention</span></div><ul class="check-list"><li>Google login runs on Google's own pages.</li><li>The backend verifies your Google ID token.</li><li>Access tokens are used briefly then discarded.</li><li>No Gmail or Drive data is requested.</li><li>Signed-in account details are stored temporarily in a server-side session (Redis on the public website). The session expires after one hour.</li><li>Raw responses are shown only to the browser in the active signed-in session.</li><li>Signing out ends the local session; it does not revoke Google's earlier consent.</li></ul></article><article class="panel"><div class="panel-head"><h3>Disconnect and manage access</h3></div><p class="panel-copy">Sign out here to erase the local session. To revoke the Google permissions granted to this app, visit your Google Account's third-party connections page.</p><button class="btn btn-secondary" type="button" id="logout-main">Sign out of this demo</button><a class="settings-link" href="https://myaccount.google.com/connections" target="_blank" rel="noopener noreferrer">Manage Google account connections ↗</a><div class="info-box">Public hosting requires HTTPS, a private Redis session store, secure Google credentials, and compliance with Google’s verification requirements. The privacy policy should be reviewed and customized before launch.</div></article></div>
+          <article class="panel setup-panel"><p class="overline">GET STARTED</p><h3>Deploy using GitHub and Render</h3><ol class="setup-steps"><li>Upload these project files to a GitHub repository. Keep <code>.env</code> out of GitHub.</li><li>Create a private Render Key Value instance for temporary sessions.</li><li>Connect the GitHub repository to a Render Web Service, or use the included <code>render.yaml</code> blueprint.</li><li>In Render, set the Google Client ID and Secret, <code>GOOGLE_REDIRECT_URI</code>, and <code>REDIS_URL</code> as environment variables.</li><li>In Google Cloud, authorize your exact HTTPS callback address: <code>https://YOUR-SITE.onrender.com/auth/google/callback</code>.</li><li>Read <code>DEPLOY_GITHUB_RENDER.md</code> for the complete deployment and publishing checklist.</li></ol><p class="muted">See DEPLOY_GITHUB_RENDER.md for the complete setup. <a href="/privacy-policy.html" target="_blank" rel="noopener noreferrer">Privacy policy template ↗</a></p></article>
+        </section>
+      </div>
+      <footer class="footer"><span>✳ Account Lens</span><span>Know what you share. Choose what you allow.</span><span><a href="/privacy-policy.html">Privacy policy</a> · Independent project · Not affiliated with Google</span></footer>
+    </main>
+  </div>
+</body>
+</html>

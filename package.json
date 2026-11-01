@@ -1,0 +1,22 @@
+{
+  "name": "google-account-lens",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Privacy-first Google sign-in and account-data transparency demo",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "check": "node --check server.js && node --check public/app.js"
+  },
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "redis": "^5.0.0",
+    "connect-redis": "^9.0.0",
+    "google-auth-library": "^9.15.1",
+    "helmet": "^8.1.0"
+  }
+}
